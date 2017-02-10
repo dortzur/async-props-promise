@@ -1,6 +1,6 @@
 {
   "name": "async-props-promise",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Promise based component data fetching for React Router",
   "main": "lib/AsyncProps",
   "repository": {
