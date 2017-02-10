@@ -41,8 +41,8 @@ import tacoFetcher from './taco-fetcher';
 class App extends React.Component {
 
   // 1. define a `loadProps` static method
-  static async loadProps(params, cb) {
-      const tacos=tacoFetcher.getTacos();    
+  static async loadProps(params) {
+      const tacos = await tacoFetcher.getTacos();    
       return {tacos};
   }
 
@@ -51,7 +51,7 @@ class App extends React.Component {
           return <div>Loading...</div>
       }
     // 2. access data as props :D
-    const tacos = this.props.tacos
+    const tacos = this.props.tacos;
     return (
       <div>
         <ul>
