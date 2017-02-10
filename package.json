@@ -1,13 +1,13 @@
 {
   "name": "async-props-promise",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Promise based component data fetching for React Router",
   "main": "lib/AsyncProps",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rackt/async-props.git"
+    "url": "https://github.com/dortzur/async-props-promise.git"
   },
-  "bugs": "https://github.com/rackt/async-props/issues",
+  "bugs": "https://github.com/dortzur/async-props-promise/issues",
   "scripts": {
     "build": "babel ./modules -d lib --ignore '__tests__'",
     "build-umd": "NODE_ENV=production webpack modules/AsyncProps.js umd/AsyncProps.js",
@@ -19,10 +19,9 @@
     "postinstall": "node ./npm-scripts/postinstall.js"
   },
   "watch": {
-    "build":"modules/**/*.*"
+    "build": "modules/**/*.*"
   },
   "authors": [
-    "Ryan Florence",
     "Dor Tzur"
   ],
   "license": "MIT",
@@ -67,12 +66,14 @@
   "tags": [
     "react",
     "react router",
-    "data"
+    "data",
+    "data fetching"
   ],
   "keywords": [
     "react",
     "react router",
-    "data"
+    "data",
+    "data fetching"
   ],
   "dependencies": {}
 }
