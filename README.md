@@ -1,35 +1,26 @@
 # AsyncProps for React Router
 
-[![npm package](https://img.shields.io/npm/v/async-props.svg?style=flat-square)](https://www.npmjs.org/package/async-props)
-[![#rackt on freenode](https://img.shields.io/badge/irc-rackt_on_freenode-61DAFB.svg?style=flat-square)](https://webchat.freenode.net/)
-
-Co-located data loading for React Router apps. Data is loaded before the new screen renders. It is designed to be both a useful solution for many apps, as well as a reference implementation for integrating data with React Router (stuff like redux, relay, falcor etc).
-
-## Docs & Help
-
-- [Changelog](/CHANGES.md)
-- [#react-router @ Reactiflux](https://discord.gg/0ZcbPKXt5bYaNQ46)
-- [Stack Overflow](http://stackoverflow.com/questions/tagged/react-router)
-
-For questions and support, please visit [our channel on Reactiflux](https://discord.gg/0ZcbPKXt5bYaNQ46) or [Stack Overflow](http://stackoverflow.com/questions/tagged/react-router). The issue tracker is *exclusively* for bug reports and feature requests.
+This is a shameless ripoff of [Async Props](https://github.com/ryanflorence/async-props/)
+This library is promise based which allows for async/await goodness. 
+View transitions happen immediately, async props are then populated when the promise resolves.
 
 ## Installation
 
 Using [npm](https://www.npmjs.com/):
 
-    $ npm install async-props
+    $ npm install async-props-promise
 
 Then with a module bundler like [webpack](https://webpack.github.io/), use as you would anything else:
 
 ```js
 // using an ES6 transpiler, like babel
-import AsyncProps from 'async-props'
+import AsyncProps from 'async-props-promise'
 ```
 
 The UMD build is also available on [npmcdn](https://npmcdn.com):
 
 ```html
-<script src="https://npmcdn.com/async-props/umd/AsyncProps.min.js"></script>
+<script src="https://npmcdn.com/async-props-promise/umd/AsyncProps.min.js"></script>
 ```
 
 You can find the library on `window.AsyncProps`.
@@ -43,20 +34,22 @@ a contributor. Please add tests with all pull requests.
 
 ```js
 import { Router, Route } from 'react-router'
-import AsyncProps from 'async-props'
+import AsyncProps from 'async-props-promise'
 import React from 'react'
 import { render } from 'react-dom'
-
+import tacoFetcher from './taco-fetcher';
 class App extends React.Component {
 
   // 1. define a `loadProps` static method
-  static loadProps(params, cb) {
-    cb(null, {
-      tacos: [ 'Pollo', 'Carnitas' ]
-    })
+  static async loadProps(params, cb) {
+      const tacos=tacoFetcher.getTacos();    
+      return {tacos};
   }
 
   render() {
+      if(!this.props.tacos){
+          return <div>Loading...</div>
+      }
     // 2. access data as props :D
     const tacos = this.props.tacos
     return (
@@ -84,7 +77,7 @@ render((
 ```js
 import { renderToString } from 'react-dom/server'
 import { match, RoutingContext } from 'react-router'
-import AsyncProps, { loadPropsOnServer } from 'async-props'
+import AsyncProps, { loadPropsOnServer } from 'async-props-promise'
 
 app.get('*', (req, res) => {
   match({ routes, location: req.url }, (err, redirect, renderProps) => {

@@ -1,5 +1,5 @@
 {
-  "name": "@dortzur/async-props",
+  "name": "async-props-promise",
   "version": "0.4.1",
   "description": "Co-located component data fetching for React Router",
   "main": "lib/AsyncProps",
