@@ -262,10 +262,15 @@ const AsyncProps = React.createClass({
     },
 
     loadAsyncProps(components, params, location, options) {
-        const {loadContext} = this.props
+        const {loadContext} = this.props;
+        let {propsAndComponents}= this.state;
+        if (propsAndComponents) {
+            propsAndComponents.propsArray = [];
+        }
         this.setState({
             loading: true,
-            prevProps: this.props
+            prevProps: this.props,
+            propsAndComponents
         }, () => {
             loadAsyncProps({
                 components: filterAndFlattenComponents(components),
@@ -301,14 +306,14 @@ const AsyncProps = React.createClass({
     },
 
     render() {
-        const {propsAndComponents} = this.state
+        const {propsAndComponents} = this.state;
         if (!propsAndComponents) {
-            return this.props.renderLoading()
+            return this.props.renderLoading();
         }
         else {
-            if (this.state.loading) {
-                propsAndComponents.propsArray = [];
-            }
+            // if (this.state.loading) {
+            //     propsAndComponents.propsArray = [];
+            // }
             return this.props.render(this.props)
         }
     }
